@@ -1,4 +1,6 @@
-import { createStore, combineReducers, compose } from 'redux'
+import { combineReducers, Action } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './ducks/counter'
 import todosReducer from './ducks/todos'
 
@@ -9,12 +11,10 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-// @see https://github.com/zalmoxisus/redux-devtools-extension#11-basic-store
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line @typescript-eslint/no-explicit-any
+const store = configureStore({ reducer: rootReducer })
 
-const enhancer = composeEnhancers()
+export type AppDispatch = typeof store.dispatch
 
-const store = createStore(rootReducer, enhancer)
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
 
 export default store

@@ -5,31 +5,29 @@ import {
   fetchTodos,
   addTodo,
   deleteTodo,
-  getVisibleTodos,
+  visibleSelector,
   setQuery
 } from '../ducks/todos'
 import Component from '../components/todos/Index'
 
 const Index = (): React.ReactElement => {
-  const { loading, query, todos } = useSelector<RootState, RootState['todos']>(
-    (state) => ({
-      loading: state.todos.loading,
-      query: state.todos.query,
-      todos: getVisibleTodos(state.todos)
-    })
-  )
+  const { loading, query, todos } = useSelector((state: RootState) => ({
+    loading: state.todos.loading,
+    query: state.todos.query,
+    todos: visibleSelector(state.todos)
+  }))
 
   const dispatch = useDispatch()
   const onChangeQuery = useCallback(
     (query: string) => dispatch(setQuery(query)),
     [dispatch]
   )
-  const onFetchTodos = useCallback(() => fetchTodos()(dispatch), [dispatch])
-  const onAddTodo = useCallback((todo: string) => addTodo(todo)(dispatch), [
+  const onFetchTodos = useCallback(() => dispatch(fetchTodos()), [dispatch])
+  const onAddTodo = useCallback((todo: string) => dispatch(addTodo(todo)), [
     dispatch
   ])
   const onDeleteTodo = useCallback(
-    (index: number) => deleteTodo(index)(dispatch),
+    (index: number) => dispatch(deleteTodo(index)),
     [dispatch]
   )
 

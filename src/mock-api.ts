@@ -1,7 +1,7 @@
 const interval = 500
 
 // mock db
-const todos: string[] = [
+let todos: string[] = [
   'Pass the exams',
   'Walk the dog',
   'Read a book',
@@ -19,7 +19,7 @@ export const listTodos = (): Promise<string[]> => {
 export const postTodo = (todo: string): Promise<string[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      todos.push(todo)
+      todos = [...todos, todo]
       resolve(todos)
     }, interval)
   })
@@ -28,7 +28,7 @@ export const postTodo = (todo: string): Promise<string[]> => {
 export const deleteTodo = (index: number): Promise<string[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      todos.splice(index, 1)
+      todos = todos.filter((_, i) => i !== index)
       resolve(todos)
     }, interval)
   })

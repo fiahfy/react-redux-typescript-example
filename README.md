@@ -19,6 +19,7 @@
 
 ### examples
 
+- https://github.com/reduxjs/rtk-github-issues-example
 - https://github.com/MasahikoJinno/re-ducks-study
 - https://github.com/Mizumaki/re-ducks_example
 
