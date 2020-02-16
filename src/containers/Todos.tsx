@@ -14,11 +14,7 @@ const Index = (): React.ReactElement => {
   const { loading, query, todos } = useSelector((state: RootState) => ({
     loading: state.todos.loading,
     query: state.todos.query,
-<<<<<<< HEAD
     todos: visibleSelector(state.todos)
-=======
-    todos: getVisibleTodos(state.todos)
->>>>>>> master
   }))
 
   const dispatch = useDispatch()
