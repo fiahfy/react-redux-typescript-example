@@ -26,7 +26,7 @@ const Index: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     onFetchTodos()
-  }, [])
+  }, [onFetchTodos])
 
   return (
     <>

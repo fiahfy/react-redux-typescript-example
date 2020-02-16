@@ -5,7 +5,7 @@ import { increment, decrement } from '../ducks/counter'
 import Component from '../components/counter/Index'
 
 const Index = (): React.ReactElement => {
-  const count = useSelector<RootState, number>((state) => state.counter.count)
+  const count = useSelector((state: RootState) => state.counter.count)
 
   const dispatch = useDispatch()
   const onIncrement = useCallback(() => dispatch(increment()), [dispatch])

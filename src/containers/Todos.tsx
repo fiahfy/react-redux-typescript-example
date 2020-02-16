@@ -11,13 +11,11 @@ import {
 import Component from '../components/todos/Index'
 
 const Index = (): React.ReactElement => {
-  const { loading, query, todos } = useSelector<RootState, RootState['todos']>(
-    (state) => ({
-      loading: state.todos.loading,
-      query: state.todos.query,
-      todos: getVisibleTodos(state.todos)
-    })
-  )
+  const { loading, query, todos } = useSelector((state: RootState) => ({
+    loading: state.todos.loading,
+    query: state.todos.query,
+    todos: getVisibleTodos(state.todos)
+  }))
 
   const dispatch = useDispatch()
   const onChangeQuery = useCallback(
