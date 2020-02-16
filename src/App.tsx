@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import store from './store'
+import GlobalStyle from './GlobalStyle'
+import Counter from './pages/Counter'
+import Index from './pages/Index'
+import Todos from './pages/Todos'
 
-function App() {
+const App = (): React.ReactElement => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider store={store}>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route path="/counter">
+            <Counter />
+          </Route>
+          <Route path="/todos">
+            <Todos />
+          </Route>
+          <Route path="/">
+            <Index />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
+  )
 }
 
-export default App;
+export default App
