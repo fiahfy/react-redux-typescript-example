@@ -1,6 +1,26 @@
 # react-redux-typescript-example
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> React Redux Example with TypeScript.
+
+## Reference
+
+- [Redux with TypeScript](https://redux.js.org/recipes/usage-with-typescript/)
+- [Ducks](https://github.com/erikras/ducks-modular-redux)
+- [Re-Ducks](https://github.com/alexnm/re-ducks)
+
+### in Japanese
+
+- https://scrapbox.io/terrierscript/Hooks%E6%99%82%E4%BB%A3%E3%81%AERedux%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E6%84%9F%E6%83%B3%E4%B8%8B%E6%9B%B8%E3%81%8D
+- https://noah.plus/blog/021/
+- https://qiita.com/Ouvill/items/a76e9cbce569d01f2931
+- https://qiita.com/IzumiSy/items/b7d8a96eacd2cd8ad510
+- https://speakerdeck.com/lemon/typescript-fsanilai-ranaireact-x-redux
+- https://www.fundely.co.jp/blog/tech/tag/re-ducks/#section4
+
+### examples
+
+- https://github.com/MasahikoJinno/re-ducks-study
+- https://github.com/Mizumaki/re-ducks_example
 
 ## Available Scripts
 

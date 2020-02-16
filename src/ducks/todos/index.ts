@@ -1,57 +1,110 @@
-import { Reducer } from 'redux'
+import { Reducer, Dispatch } from 'redux'
+import * as api from '../../mock-api'
 
 // types
-const ADD_TODO = 'my-app/todos/ADD_TODO'
-const DELETE_TODO = 'my-app/todos/DELETE_TODO'
+const SET_LOADING = 'my-app/todos/SET_LOADING'
+const SET_QUERY = 'my-app/todos/SET_QUERY'
+const SET_TODOS = 'my-app/todos/SET_TODOS'
 
-interface AddTodoAction {
-  type: typeof ADD_TODO
+type SetLoadingAction = {
+  type: typeof SET_LOADING
+  payload: boolean
+}
+type SetQueryAction = {
+  type: typeof SET_QUERY
   payload: string
 }
-interface DeleteTodoAction {
-  type: typeof DELETE_TODO
-  payload: number
+type SetTodosAction = {
+  type: typeof SET_TODOS
+  payload: string[]
 }
 
-type ActionTypes = AddTodoAction | DeleteTodoAction
+type Action = SetLoadingAction | SetQueryAction | SetTodosAction
 
 // actions
-export const addTodo = (todo: string): ActionTypes => {
+export const setLoading = (active: boolean): Action => {
   return {
-    type: ADD_TODO,
-    payload: todo
+    type: SET_LOADING,
+    payload: active
   }
 }
-export const deleteTodo = (index: number): ActionTypes => {
+export const setQuery = (query: string): Action => {
   return {
-    type: DELETE_TODO,
-    payload: index
+    type: SET_QUERY,
+    payload: query
   }
+}
+export const setTodos = (todos: string[]): Action => {
+  return {
+    type: SET_TODOS,
+    payload: todos
+  }
+}
+
+// operations
+export const fetchTodos = () => async (dispatch: Dispatch): Promise<void> => {
+  dispatch(setLoading(true))
+  const todos = await api.listTodos()
+  dispatch(setTodos(todos))
+  dispatch(setLoading(false))
+}
+export const addTodo = (todo: string) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  dispatch(setLoading(true))
+  const todos = await api.postTodo(todo)
+  dispatch(setTodos(todos))
+  dispatch(setLoading(false))
+}
+export const deleteTodo = (index: number) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  dispatch(setLoading(true))
+  const todos = await api.deleteTodo(index)
+  dispatch(setTodos(todos))
+  dispatch(setLoading(false))
+}
+
+// selectors
+export const getVisibleTodos = (state: State): string[] => {
+  const { todos, query } = state
+  return todos.filter((todo) => !query || todo.includes(query))
 }
 
 // reducer
 type State = {
+  loading: boolean
+  query: string
   todos: string[]
 }
 
 const initialState: State = {
+  loading: false,
+  query: '',
   todos: []
 }
 
-const reducer: Reducer<State, ActionTypes> = (state = initialState, action) => {
+const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TODO: {
-      const todo = action.payload
+    case SET_LOADING: {
+      const loading = action.payload
       return {
         ...state,
-        todos: [...state.todos, todo]
+        loading
       }
     }
-    case DELETE_TODO: {
-      const index = action.payload
+    case SET_QUERY: {
+      const query = action.payload
       return {
         ...state,
-        todos: [...state.todos.slice(0, index), ...state.todos.slice(index + 1)]
+        query
+      }
+    }
+    case SET_TODOS: {
+      const todos = action.payload
+      return {
+        ...state,
+        todos: [...todos]
       }
     }
     default:

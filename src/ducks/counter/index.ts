@@ -4,28 +4,24 @@ import { Reducer } from 'redux'
 const INCREMENT = 'my-app/counter/INCREMENT'
 const DECREMENT = 'my-app/counter/DECREMENT'
 
-interface IncrementAction {
+type IncrementAction = {
   type: typeof INCREMENT
-  payload: undefined
 }
-interface DecrementAction {
+type DecrementAction = {
   type: typeof DECREMENT
-  payload: undefined
 }
 
-type ActionTypes = IncrementAction | DecrementAction
+type Action = IncrementAction | DecrementAction
 
 // actions
-export const increment = (): ActionTypes => {
+export const increment = (): Action => {
   return {
-    type: INCREMENT,
-    payload: undefined
+    type: INCREMENT
   }
 }
-export const decrement = (): ActionTypes => {
+export const decrement = (): Action => {
   return {
-    type: DECREMENT,
-    payload: undefined
+    type: DECREMENT
   }
 }
 
@@ -38,7 +34,7 @@ const initialState: State = {
   count: 0
 }
 
-const reducer: Reducer<State, ActionTypes> = (state = initialState, action) => {
+const reducer: Reducer<State, Action> = (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT:
       return {

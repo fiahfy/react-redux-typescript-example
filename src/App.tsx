@@ -3,9 +3,9 @@ import { Provider } from 'react-redux'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import store from './store'
 import GlobalStyle from './GlobalStyle'
-import Counter from './pages/Counter'
-import Index from './pages/Index'
-import Todos from './pages/Todos'
+import Counter from './containers/Counter'
+import Index from './containers/Index'
+import Todos from './containers/Todos'
 
 const App = (): React.ReactElement => {
   return (
