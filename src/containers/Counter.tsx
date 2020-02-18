@@ -4,7 +4,7 @@ import { RootState } from '../store'
 import { increment, decrement } from '../ducks/counter'
 import Component from '../components/counter/Index'
 
-const Index = (): React.ReactElement => {
+const Index = (): JSX.Element => {
   const count = useSelector((state: RootState) => state.counter.count)
 
   const dispatch = useDispatch()

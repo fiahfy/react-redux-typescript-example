@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Index = (): React.ReactElement => {
+const Index = (): JSX.Element => {
   return (
     <>
       <h2>index</h2>

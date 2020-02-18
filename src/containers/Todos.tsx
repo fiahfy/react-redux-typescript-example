@@ -10,7 +10,7 @@ import {
 } from '../ducks/todos'
 import Component from '../components/todos/Index'
 
-const Index = (): React.ReactElement => {
+const Index = (): JSX.Element => {
   const { loading, query, todos } = useSelector((state: RootState) => ({
     loading: state.todos.loading,
     query: state.todos.query,

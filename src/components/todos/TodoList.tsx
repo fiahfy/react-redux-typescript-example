@@ -9,7 +9,7 @@ type Props = {
 const TodoList: React.FC<Props> = (props: Props) => {
   const { todos, onDeleteTodo } = props
 
-  const renderTodos = (): React.ReactElement[] => {
+  const renderTodos = (): JSX.Element[] => {
     return todos.map((todo, i) => {
       const handleClickDelete = (): void => {
         onDeleteTodo(i)
