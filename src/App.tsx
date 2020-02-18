@@ -7,7 +7,7 @@ import Counter from './containers/Counter'
 import Index from './containers/Index'
 import Todos from './containers/Todos'
 
-const App = (): React.ReactElement => {
+const App = (): JSX.Element => {
   return (
     <Provider store={store}>
       <GlobalStyle />
