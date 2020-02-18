@@ -1,35 +1,34 @@
 const interval = 500
 
 // mock db
-const todos: string[] = [
+let todos: string[] = [
   'Pass the exams',
   'Walk the dog',
   'Read a book',
   'Draw a painting'
 ]
 
-export const listTodos = (): Promise<string[]> => {
+const sleep = (): Promise<void> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(todos)
+      resolve()
     }, interval)
   })
 }
 
-export const postTodo = (todo: string): Promise<string[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      todos.push(todo)
-      resolve(todos)
-    }, interval)
-  })
+export const listTodos = async (): Promise<string[]> => {
+  await sleep()
+  return [...todos]
 }
 
-export const deleteTodo = (index: number): Promise<string[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      todos.splice(index, 1)
-      resolve(todos)
-    }, interval)
-  })
+export const postTodo = async (todo: string): Promise<string[]> => {
+  await sleep()
+  todos = [...todos, todo]
+  return [...todos]
+}
+
+export const deleteTodo = async (index: number): Promise<string[]> => {
+  await sleep()
+  todos = todos.filter((_, i) => i !== index)
+  return [...todos]
 }
