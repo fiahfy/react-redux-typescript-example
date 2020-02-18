@@ -15,7 +15,7 @@ const initialState: State = {
 }
 
 const todos = createSlice({
-  name: 'my-app/counter',
+  name: 'my-app/todos',
   initialState,
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>): void => {
