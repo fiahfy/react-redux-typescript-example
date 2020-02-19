@@ -1,4 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../store'
+import {
+  fetchTodos,
+  addTodo,
+  deleteTodo,
+  getVisibleTodos,
+  setQuery
+} from '../../ducks/todos'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
 import TodoSearch from './TodoSearch'
@@ -48,4 +57,38 @@ const Index: React.FC<Props> = (props: Props) => {
   )
 }
 
-export default Index
+const IndexContainer = (): JSX.Element => {
+  const { loading, query, todos } = useSelector((state: RootState) => ({
+    loading: state.todos.loading,
+    query: state.todos.query,
+    todos: getVisibleTodos(state.todos)
+  }))
+
+  const dispatch = useDispatch()
+  const onChangeQuery = useCallback(
+    (query: string) => dispatch(setQuery(query)),
+    [dispatch]
+  )
+  const onFetchTodos = useCallback(() => fetchTodos()(dispatch), [dispatch])
+  const onAddTodo = useCallback((todo: string) => addTodo(todo)(dispatch), [
+    dispatch
+  ])
+  const onDeleteTodo = useCallback(
+    (index: number) => deleteTodo(index)(dispatch),
+    [dispatch]
+  )
+
+  const props = {
+    loading,
+    query,
+    todos,
+    onChangeQuery,
+    onFetchTodos,
+    onAddTodo,
+    onDeleteTodo
+  }
+
+  return <Index {...props} />
+}
+
+export default IndexContainer
